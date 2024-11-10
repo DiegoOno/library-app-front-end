@@ -8,7 +8,7 @@ type MaskedInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   onlyNumeric?: boolean
 }
 
-const MaskedInput = ({ mask, value, onChange, onlyNumeric, ...props }: MaskedInputProps) => {
+const MaskedInput = ({ mask, value, onChange, ...props }: MaskedInputProps) => {
   return (
     <Input
       value={value ? applyMask(value, mask) : ''}

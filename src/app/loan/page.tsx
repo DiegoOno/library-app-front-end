@@ -1,3 +1,5 @@
+'use client'
+
 import withLayout from '@/hoc/withLayout';
 
 const Page = () => {

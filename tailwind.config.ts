@@ -18,8 +18,12 @@ export default {
         'warning': '#ffc107',
         'success': '#28a745',
         'error': '#dc3545',
+        'table-header': '#E5E5E5',
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require('tailwind-scrollbar')({ nocompatible: true })
+  ],
 } satisfies Config;
