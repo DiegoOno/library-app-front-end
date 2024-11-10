@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 
 import * as Form from '@/components/ui/Form'
 import { useForm } from 'react-hook-form'
-import { libraryUserZodShema } from '../validation/libraryUserZodShema'
+import { libraryUserZodSchema } from '../validation/libraryUserZodShema'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/components/ui/Input'
@@ -26,8 +26,8 @@ interface LibraryUserModalProps {
 }
 const LibraryUserModal = ({ isOpen, selectedUserId, onClose, onSuccess }: LibraryUserModalProps) => {
 
-  const form = useForm<z.infer<typeof libraryUserZodShema>>({
-    resolver: zodResolver(libraryUserZodShema),
+  const form = useForm<z.infer<typeof libraryUserZodSchema>>({
+    resolver: zodResolver(libraryUserZodSchema),
     defaultValues: {
       id: null,
       name: '',

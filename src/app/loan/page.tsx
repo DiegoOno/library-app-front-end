@@ -1,12 +1,18 @@
 'use client'
 
+import Container from '@/components/ui/container';
+import ContentWrapper from '@/components/ui/ContentWrapper';
 import withLayout from '@/hoc/withLayout';
+import Loans from './components/Loans';
+
 
 const Page = () => {
   return (
-    <div>
-      <h1>Library User</h1>
-    </div>
+    <Container>
+      <ContentWrapper>
+        <Loans />
+      </ContentWrapper>
+    </Container>
   );
 }
 

@@ -21,6 +21,16 @@ export const findBookById = async (id: number) => {
   }
 }
 
+export const findAllAvailableBooks = async () => {
+  try {
+    const response = await api.get('/book/available');
+    return response.data
+  } catch(error) {
+    console.log(error);
+    throw error
+  }
+}
+
 export const createBook = async (book: IBook) => {
   try {
     const response = await api.post('/book', book);

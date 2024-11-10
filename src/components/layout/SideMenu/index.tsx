@@ -25,7 +25,7 @@ const SideMenu = () => {
         className={cn("text-xl font-bold text-[#505050]", pathname === '/loan' ? 'text-primary' : '')} 
         href="/loan"
       >
-        Emprestimos
+        Empréstimos
       </Link>
     </div>
   )

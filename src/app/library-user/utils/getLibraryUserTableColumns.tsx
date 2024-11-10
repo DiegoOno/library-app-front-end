@@ -1,7 +1,10 @@
 import { Button } from '@/components/ui/Button'
+import { applyMask } from '@/core/utils/dataFormat'
 import { ILibraryUser } from '@/interface/libraryUser'
 import { ColumnDef } from '@tanstack/react-table'
 import { Trash2 } from 'lucide-react'
+
+import { format, parse } from 'date-fns'
 
 export const getLibraryUserTableColumns = ({ handleDelete }: { handleDelete: (id: number) => void }): ColumnDef<ILibraryUser>[] => [
   {
@@ -11,6 +14,30 @@ export const getLibraryUserTableColumns = ({ handleDelete }: { handleDelete: (id
   {
     accessorKey: 'email',
     header: 'Email',
+  },
+  {
+    accessorKey: 'phone',
+    header: 'Telefone',
+    cell: ({ row }) => {
+      return (
+        <span>{applyMask(row.original.phone, '(##) # ####-####')}</span>
+      )
+    }
+  },
+  {
+    accessorKey: 'registerDate',
+    header: 'Data de Cadastro',
+    cell: ({ row }) => {
+      const formatedDateTime = format(
+        parse(
+          row.original.registerDate, 
+          "yyyy-MM-dd'T'HH:mm:ss", 
+          new Date()
+        ), "dd/MM/yyyy HH:mm:ss")
+      return (
+        <span>{formatedDateTime}</span>
+      )
+    }
   },
   {
     accessorKey: 'actions',
@@ -28,7 +55,6 @@ export const getLibraryUserTableColumns = ({ handleDelete }: { handleDelete: (id
             className="text-white bg-red-300 hover:bg-red-500"
           >
             <Trash2 />
-            Excluir
           </Button>
         </div>
       )
