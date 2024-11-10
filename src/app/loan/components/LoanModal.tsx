@@ -153,6 +153,8 @@ const LoanModal = ({
   useEffect(() => {
     if (showRecommendations && form.getValues('libraryUser')?.id) {
       loadBooksRecommendations();
+    } else {
+      loadAvailableBooks();
     }
   }, [showRecommendations])
 
