@@ -6,7 +6,7 @@ export const findAllLibraryUsers = async () => {
     const response = await api.get('/library-user');
     return response.data
   } catch(error) {
-    console.log(error);
+    console.error(error);
     throw error
   }
 }
@@ -16,7 +16,7 @@ export const findLibraryUserById = async (id: number) => {
     const response = await api.get(`/library-user/${id}`);
     return response.data
   } catch(error) {
-    console.log(error);
+    console.error(error);
     throw error
   }
 }
@@ -26,7 +26,7 @@ export const createLibraryUser = async (libraryUser: ILibraryUser) => {
     const response = await api.post('/library-user', libraryUser);
     return response.data
   } catch(error) {
-    console.log(error);
+    console.error(error);
     throw error
   }
 }
@@ -36,7 +36,7 @@ export const updateLibraryUser = async (libraryUser: ILibraryUser) => {
     const response = await api.put(`/library-user`, libraryUser);
     return response.data
   } catch(error) {
-    console.log(error);
+    console.error(error);
     throw error
   }
 }
@@ -46,7 +46,7 @@ export const deleteLibraryUser = async (id: number) => {
     const response = await api.delete(`/library-user/${id}`);
     return response.data
   } catch(error) {
-    console.log(error);
+    console.error(error);
     throw error
   }
 }

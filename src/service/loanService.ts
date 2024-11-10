@@ -6,7 +6,7 @@ export const findAllLoans = async () => {
     const response = await api.get('/loan');
     return response.data
   } catch(error) {
-    console.log(error);
+    console.error(error);
     throw error
   }
 }
@@ -16,7 +16,7 @@ export const findLoanById = async (id: number) => {
     const response = await api.get(`/loan/${id}`);
     return response.data
   } catch(error) {
-    console.log(error);
+    console.error(error);
     throw error
   }
 }
@@ -26,7 +26,7 @@ export const createLoan = async (loan: ILoan) => {
     const response = await api.post('/loan', loan);
     return response.data
   } catch(error) {
-    console.log(error);
+    console.error(error);
     throw error
   }
 }
@@ -36,7 +36,7 @@ export const updateLoan = async (loan: ILoan) => {
     const response = await api.put('/loan', loan);
     return response.data
   } catch(error) {
-    console.log(error);
+    console.error(error);
     throw error
   }
 }

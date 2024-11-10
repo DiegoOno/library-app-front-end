@@ -1,8 +1,8 @@
 'use client'
 
+import { useEffect, useReducer } from 'react'
 import SliderDialog from '@/components/ui/SliderDialog'
 import { createLibraryUser, findLibraryUserById, updateLibraryUser } from '@/service/libraryUserService'
-import { useEffect } from 'react'
 
 import * as Form from '@/components/ui/Form'
 import { useForm } from 'react-hook-form'
@@ -25,6 +25,7 @@ interface LibraryUserModalProps {
   onSuccess?: () => Promise<void>
 }
 const LibraryUserModal = ({ isOpen, selectedUserId, onClose, onSuccess }: LibraryUserModalProps) => {
+  const [isLoading, toggleLoading] = useReducer((state) => !state, false)
 
   const form = useForm<z.infer<typeof libraryUserZodSchema>>({
     resolver: zodResolver(libraryUserZodSchema),
@@ -33,6 +34,7 @@ const LibraryUserModal = ({ isOpen, selectedUserId, onClose, onSuccess }: Librar
       name: '',
       email: '',
       phone: '',
+      registerDate: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss"),
     },
   })
   
@@ -43,8 +45,9 @@ const LibraryUserModal = ({ isOpen, selectedUserId, onClose, onSuccess }: Librar
       form.setValue('name', user.name)
       form.setValue('email', user.email)
       form.setValue('phone', user.phone)
+      form.setValue('registerDate', user.registerDate)
     } catch(error) {
-      console.log(error);
+      console.error(error);
       form.reset();
     }
   }
@@ -55,12 +58,12 @@ const LibraryUserModal = ({ isOpen, selectedUserId, onClose, onSuccess }: Librar
 
     try {
       let response = null
-
+      toggleLoading()
       const form = {
         ...values,
         ...(selectedUserId && { id: selectedUserId }),
         phone: removeSpecialCharacters(values.phone),
-        registerDate: format(new Date(), "yyyy-MM-dd'T'HH:mm:ss")
+        registerDate: selectedUserId ? values.registerDate : format(new Date(), "yyyy-MM-dd'T'HH:mm:ss")
       }
 
       if (selectedUserId) {
@@ -80,13 +83,15 @@ const LibraryUserModal = ({ isOpen, selectedUserId, onClose, onSuccess }: Librar
         onSuccess && onSuccess()
       }
     } catch(error) {
-      console.log(error);
+      console.error(error);
       toast({
         title: 'Erro ao salvar usuário',
         description: 'Ocorreu um erro ao salvar o usuário',
         variant: 'destructive',
         duration: 3000
       })
+    } finally {
+      toggleLoading()
     }
   }
 
@@ -103,6 +108,8 @@ const LibraryUserModal = ({ isOpen, selectedUserId, onClose, onSuccess }: Librar
   }, [isOpen, selectedUserId])
   
   if (!isOpen) return null
+
+  console.log(form.formState.errors)
 
   return (
     <SliderDialog
@@ -153,7 +160,14 @@ const LibraryUserModal = ({ isOpen, selectedUserId, onClose, onSuccess }: Librar
               )}
             />
           </div>
-          <Button type="submit" className='bg-primary text-white font-bold'>Salvar</Button>
+          <Button 
+            type="submit" 
+            className='bg-primary text-white font-bold'
+            disabled={isLoading}
+            loading={isLoading}
+          >
+            Salvar
+          </Button>
         </form>
       </Form.Form>
     </SliderDialog>

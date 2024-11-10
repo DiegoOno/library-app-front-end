@@ -5,7 +5,7 @@ export const findRecommendationsByLibraryUserId = async (libraryUserId: number) 
     const response = await api.get(`/recommendations/${libraryUserId}`);
     return response.data
   } catch(error) {
-    console.log(error);
+    console.error(error);
     throw error
   }
 }

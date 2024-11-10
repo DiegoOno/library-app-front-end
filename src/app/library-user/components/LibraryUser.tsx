@@ -22,7 +22,7 @@ const Users = () => {
       const users = await findAllLibraryUsers();
       setUsers(users);
     } catch(error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -43,17 +43,20 @@ const Users = () => {
   }
   
   const handleDelete = async (id: number) => {
-    try {
-      await deleteLibraryUser(id)
-      await loadUsers()
-      toast({
-        title: 'Usuário excluido com sucesso',
-        description: 'O usuário foi excluido com sucesso',
-        variant: 'success',
-        duration: 3000
-      })
-    } catch(error) {
-      console.log(error);
+
+    if (window.confirm('Tem certeza que deseja excluir o usuário?')) {
+      try {
+        await deleteLibraryUser(id)
+        await loadUsers()
+        toast({
+          title: 'Usuário excluido com sucesso',
+          description: 'O usuário foi excluido com sucesso',
+          variant: 'success',
+          duration: 3000
+        })
+      } catch(error) {
+        console.error(error);
+      }
     }
   }
 
@@ -66,8 +69,6 @@ const Users = () => {
   useEffect(() => {
     loadUsers();
   }, [])
-
-  console.log(users)
 
   return (
     <Card className="h-fit" title="Usuários" headerButton={renderCreateButton()}>

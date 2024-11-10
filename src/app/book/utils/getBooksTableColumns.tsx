@@ -40,7 +40,6 @@ export const getBooksTableColumns = ({ handleDelete }: { handleDelete: (id: numb
             className="text-white bg-red-300 hover:bg-red-500"
           >
             <Trash2 />
-            Excluir
           </Button>
         </div>
       )

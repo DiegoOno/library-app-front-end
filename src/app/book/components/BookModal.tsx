@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import SliderDialog from '@/components/ui/SliderDialog'
 import { createBook, findBookById, updateBook } from '@/service/bookService'
-import { useEffect } from 'react'
+import { useEffect, useReducer } from 'react'
 
 import * as Form from '@/components/ui/Form'
 import { useForm } from 'react-hook-form'
@@ -24,6 +24,7 @@ interface BookModalProps {
 }
 
 const BookModal = ({ isOpen, onClose, onSuccess, selectedBookId }: BookModalProps) => {
+  const [isLoading, toggleLoading] = useReducer((state) => !state, false)
 
   const form = useForm<z.infer<typeof bookZodSchema>>({
     resolver: zodResolver(bookZodSchema),
@@ -59,7 +60,7 @@ const BookModal = ({ isOpen, onClose, onSuccess, selectedBookId }: BookModalProp
 
   const handleSaveBook = async (data: z.infer<typeof bookZodSchema>) => {
     try {
-      console.log(data)
+      toggleLoading()
       const form = {
         ...(selectedBookId && { id: data.id }),
         title: data.title,
@@ -86,6 +87,7 @@ const BookModal = ({ isOpen, onClose, onSuccess, selectedBookId }: BookModalProp
     } catch(error) {
       console.error(error);
     } finally {
+      toggleLoading()
       onClose()
     }
   }
@@ -196,6 +198,8 @@ const BookModal = ({ isOpen, onClose, onSuccess, selectedBookId }: BookModalProp
           <Button 
             type="submit"
             className="bg-primary text-white font-bold"
+            disabled={isLoading}
+            loading={isLoading}
           >
             Salvar
           </Button>

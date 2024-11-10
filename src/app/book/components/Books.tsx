@@ -31,21 +31,23 @@ const Content = () => {
   }
 
   const handleDelete = async (id: number) => {
-    try {
-      await deleteBook(id)
-      loadBooks()
-      toast({
-        title: 'Livro deletado com sucesso',
-        description: 'O livro foi deletado com sucesso',
-        variant: 'success'
-      })
-    } catch(error) {
-      console.error(error);
-      toast({
-        title: 'Erro ao deletar livro',
-        description: 'Ocorreu um erro ao deletar o livro',
-        variant: 'error'
-      })
+    if (window.confirm('Tem certeza que deseja excluir o livro?')) {
+      try {
+        await deleteBook(id)
+        loadBooks()
+        toast({
+          title: 'Livro deletado com sucesso',
+          description: 'O livro foi deletado com sucesso',
+          variant: 'success'
+        })
+      } catch(error) {
+        console.error(error);
+        toast({
+          title: 'Erro ao deletar livro',
+          description: 'Ocorreu um erro ao deletar o livro',
+          variant: 'error'
+        })
+      }  
     }
   }
 
@@ -81,7 +83,6 @@ const Content = () => {
         columns={getBooksTableColumns({ handleDelete })}
         data={books}
         onClickRow={(row) => {
-          console.log({ id: row.id })
           setBookSelectedId(row.id)
           handleOpenModal()
         }}

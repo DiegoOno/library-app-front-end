@@ -5,4 +5,5 @@ export const libraryUserZodSchema = z.object({
   name: z.string().min(1, { message: 'Nome obrigatorio' }),
   email: z.string().email('Email inválido').min(1, { message: 'Email obrigatorio' }),
   phone: z.string().min(1, { message: 'Telefone obrigatorio' }),
+  registerDate: z.string().nullish(),
 })
