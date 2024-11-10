@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Library App
+## Primeiros passos
 
-## Getting Started
+**1. Clone este repositório**
+```sh
+# Com HTTPS:
+  git clone https://github.com/DiegoOno/library-app-front-end.git
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  # Com SSH
+  git clone git@github.com:DiegoOno/library-app-front-end.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**2. Instale as dependências do projeto com o comando de acordo com seu gerenciador de pacotes:**
+```bash
+yarn ou npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**2. Em seguida, preencha as variaveis de ambiente. Replicando as variáreis do arquivo `.env.example` para `.env`.**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**3. Para iniciar o projeto, execute o seguintes comandos:**
+```bash
+yarn dev
+```
 
-## Learn More
+**Abra [http://localhost:3000](http://localhost:3000) no seu navegador. OBS: Caso a porta estiver em uso, será sugerido uma nova porta na inicialização. Assim, ajuste a url com base nisso.**
 
-To learn more about Next.js, take a look at the following resources:
+## Requisitos
+* Node.JS na versão 18 ou acima
+* Algum gerenciador de pacotes node: Yarn ou NPM
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tecnologias
+* [Next.js](https://nextjs.org/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [Shadcn UI](https://ui.shadcn.com/)
+* [Zod](https://zod.dev/)
+* [React Hook Form](https://react-hook-form.com/)
+* [Lucid React - Biblioteca de Ícones](https://lucide.dev/icons/)
+* [Framer Motion - Biblioteca para animações](https://www.framer.com/motion)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Preview
+**Neste projeto há um link de preview que está sendo executado na plataforma Vercel com o .env configurado para chamar as requisições com o back-end executando de maneira local, em http://localhost:8080**
 
-## Deploy on Vercel
+**Com isso é possível apenas acessar o link, sem a necessidade de clonar e executar o projeto localmente**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## **Link do preview:** **https://library-app-front-end.vercel.app/**
